@@ -186,6 +186,7 @@ MonoBehaviour:
   - {fileID: 1062543421560560248, guid: a1a93d1cbc6a8904a9038f9b3d4d74bb, type: 3}
   - {fileID: 3622745926506827585, guid: fe6264185c5bc9148a3873ca8e708d4b, type: 3}
   - {fileID: 973623373400173089, guid: 959d23bde470d6242b9427efe4025d6c, type: 3}
+  - {fileID: 973623373400173089, guid: 5a2c87657ab43674cbb49eb26f383420, type: 3}
   spawner: {fileID: 155091792}
   controller: {fileID: 315911066}
   queueLenght: 4
@@ -658,6 +659,7 @@ MonoBehaviour:
   - {fileID: 1062543421560560248, guid: a1a93d1cbc6a8904a9038f9b3d4d74bb, type: 3}
   - {fileID: 3622745926506827585, guid: fe6264185c5bc9148a3873ca8e708d4b, type: 3}
   - {fileID: 973623373400173089, guid: 959d23bde470d6242b9427efe4025d6c, type: 3}
+  - {fileID: 973623373400173089, guid: 5a2c87657ab43674cbb49eb26f383420, type: 3}
   spawner: {fileID: 1234900579}
   controller: {fileID: 491587064}
   queueLenght: 4
