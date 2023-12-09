@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,6 +32,8 @@ namespace GameScene
             * Todo: 
             * Implementirati dodavanje tetromina u metricu zauzeæa.
             */
+            if (x < 0 || y < 0 || x >= width || y >= 2 * height)
+                return;
             matrix[y, x] = tetromino;
         }
 
@@ -53,7 +56,9 @@ namespace GameScene
             * do koje se tetromino smije spustiti.
             */
 
-            while(CheckIfFieldEmpty(y--, x)) {}
+            while(CheckIfFieldEmpty(y, x)) {
+                y--;
+            }
             return y + 1;
         }
 
@@ -118,7 +123,7 @@ namespace GameScene
                 }
             }
 
-            int random = Random.Range(0, width);
+            int random = UnityEngine.Random.Range(0, width);
             for (int j = 0; j < width; j++)
             {
                 if (j != random)

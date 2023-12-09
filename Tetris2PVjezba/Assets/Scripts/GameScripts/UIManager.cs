@@ -94,9 +94,9 @@ namespace GameScene
             //deaktivirajte korutinu za znak Go!
             _go.SetActive(false);
             //instancirati korutinu za broj spuštenih tetronima
-            PiecesPlaced1 = PiecesPlaced2 = 0;
+            _countPPS = PPSCounter();
             //pokrenuti korutinu za broj spuštenih tetronima
-            StartCoroutine(PPSCounter());
+            StartCoroutine(_countPPS);
             //pohraniti vrijeme početka
             _startTime = Time.time;
             //pozvati metodu GameStart() instance klase GameManager

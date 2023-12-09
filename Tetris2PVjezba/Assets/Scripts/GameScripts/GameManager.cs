@@ -51,9 +51,9 @@ namespace GameScene
             queue1.NextTetromino();
             queue2.NextTetromino();
             //definiati korutinu za bacanje novog tetromina
-
+            dropCoroutine = DropTime();
             //pokrenuti korutinu za bacanje novog tetromina
-            StartCoroutine(DropTime());
+            StartCoroutine(dropCoroutine);
         }
 
         private IEnumerator DropTime()
