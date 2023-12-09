@@ -54,6 +54,39 @@ namespace GameScene
             * Kao primjer moze se koristiti dio koda u metodi Update unutar provjere
             * komande za spuštanje tetromina za jednu lokaciju.
             */
+            bool pass = true;
+
+            if (tetrominoTransform.localPosition.y <= tetrominoStats.down)
+            {
+                tetrominoStats.LockTetromino();
+                GameManager.Instance.SumPiece(this.playerName);
+                SpawnNew();
+                allowedToPutOnHold = true;
+                pass = false;
+            }
+            else if (pass)
+            {
+                foreach (Transform childTile in tetrominoTransform)
+                {
+                    int x = (int)Mathf.Floor(childTile.position.x - transform.position.x);
+                    int y = (int)Mathf.Floor(childTile.position.y - transform.position.y);
+
+                    if (grid.CheckIfFieldEmpty(y - 1, x) == false)
+                    {
+                        tetrominoStats.LockTetromino();
+                        GameManager.Instance.SumPiece(this.playerName);
+                        allowedToPutOnHold = true;
+                        SpawnNew();
+                        pass = false;
+                        break;
+                    }
+                }
+            }
+            if (pass)
+            {
+                tetrominoTransform.Translate(new Vector3(0, -1, 0), Space.World);
+            }
+
         }
 
         void Update()
@@ -110,8 +143,6 @@ namespace GameScene
                 }
                 if (pass && Time.time - moveDownTimepoint >= 0.08f)
                 {
-
-
                     moveDownTimepoint = Time.time;
 
                     tetrominoTransform.Translate(new Vector3(0, -1, 0), Space.World);
@@ -227,6 +258,48 @@ namespace GameScene
             * Implementirati logiku kretanja u lijevo po uputama. 
             * Kao primjer može se koristiti analogna metoda za kretanje u desno.
             */
+            if (tetrominoTransform.localPosition.x < tetrominoStats.left)
+            {
+                movedLefState = 0;
+                return;
+            }
+
+            if (movedLefState == 0 || (movedLefState == 1 && Time.time - moveRightTimepoint >= longMoveInterval)
+                || (movedLefState == 2 && Time.time - moveRightTimepoint >= shortMoveInterval))
+            {
+                if (movedLefState == 0)
+                {
+                    movedLefState = 1;
+                }
+                else
+                {
+                    movedLefState = 2;
+                }
+
+                moveRightTimepoint = Time.time;
+
+                bool pass = true;
+                foreach (Transform childTile in tetrominoTransform)
+                {
+                    int x = (int)Mathf.Floor(childTile.position.x - transform.position.x);
+                    int y = (int)Mathf.Floor(childTile.position.y - transform.position.y);
+
+                    if (grid.CheckIfFieldEmpty(y, x - 1) == false)
+                    {
+                        pass = false;
+                    }
+                }
+
+                if (pass)
+                {
+                    tetrominoTransform.Translate(new Vector3(-1, 0, 0), Space.World);
+                    tetrominoStats.UpdateGhost();
+                }
+                else
+                {
+                    movedLefState = 0;
+                }
+            }
         }
 
         private void Rotate(float degrees)

@@ -40,6 +40,8 @@ namespace GameScene
            * Todo: 
            * Implementirati provjeru zauzeæa zadanog polja.
            */
+            if (x < 0 || y < 0 || x >= width || y >= 2 * height)
+                return false;
             return matrix[y,x] == null;
         }
 

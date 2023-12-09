@@ -84,21 +84,23 @@ namespace GameScene
         private IEnumerator StartingGame()
         {
             //Aktivirajte korituinu za znak Ready
+            _ready.SetActive(true);
             yield return new WaitForSeconds(1);
             //deaktivirajte korutinu za znak Ready
             _ready.SetActive(false);
             //aktivirajte korituinu za znak Go!
+            _go.SetActive(true);
              yield return new WaitForSeconds(1);
             //deaktivirajte korutinu za znak Go!
-
+            _go.SetActive(false);
             //instancirati korutinu za broj spuštenih tetronima
-
+            PiecesPlaced1 = PiecesPlaced2 = 0;
             //pokrenuti korutinu za broj spuštenih tetronima
-            
+            StartCoroutine(PPSCounter());
             //pohraniti vrijeme početka
-         
+            _startTime = Time.time;
             //pozvati metodu GameStart() instance klase GameManager
-          
+            GameManager.Instance.GameStart();
         }
 
         private void SetScores()
@@ -141,20 +143,12 @@ namespace GameScene
 
         public void SumLinesClearedPlayer1(int lines)
         {
-            /*
-           * Todo: 
-           * Implementirati ažuriranje i prikaz broja
-           * poèišæenih linija igraèa 1.
-           */
+            _player1LinesCleared.SetText(lines.ToString());
         }
 
         public void SumLinesClearedPlayer2(int lines)
         {
-            /*
-           * Todo: 
-           * Implementirati ažuriranje i prikaz broja
-           * poèišæenih linija igraèa 2.
-           */
+            _player2LinesCleared.SetText(lines.ToString());
         }
     }
 }

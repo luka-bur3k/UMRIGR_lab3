@@ -42,11 +42,18 @@ namespace GameScene
 
         public void GameStart()
         {
-            //napuniti red čekanja za prvog i za drugog igrača
-            //za svaki red čekanja posaviti sljedeči tetromino
-            //definiati korutinu za bacanje novog tetromina
-            //pokrenuti korutinu za bacanje novog tetromina
 
+            //napuniti red čekanja za prvog i za drugog igrača
+            queue1.FillQueue();
+            queue2.FillQueue();
+
+            //za svaki red čekanja posaviti sljedeči tetromino
+            queue1.NextTetromino();
+            queue2.NextTetromino();
+            //definiati korutinu za bacanje novog tetromina
+
+            //pokrenuti korutinu za bacanje novog tetromina
+            StartCoroutine(DropTime());
         }
 
         private IEnumerator DropTime()

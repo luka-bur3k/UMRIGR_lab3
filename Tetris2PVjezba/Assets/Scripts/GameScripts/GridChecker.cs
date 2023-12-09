@@ -41,7 +41,43 @@ namespace GameScene
              * je provjeriti dispozicije za dva mjesta u desno i dva mjesta u lijevo.
              * 
             */
-            
+
+            priv = position;
+            priv.x -= 2;
+            tetrominoTransform.position = priv;
+
+            if (string.Equals(tetrominoStats.tetName, "long") && CheckGrid(tetrominoTransform, grid, gridPosition))
+            {
+                return true;
+            }
+
+            priv = position;
+            priv.x += 2;
+            tetrominoTransform.position = priv;
+
+            if (string.Equals(tetrominoStats.tetName, "long") && CheckGrid(tetrominoTransform, grid, gridPosition))
+            {
+                return true;
+            }
+
+            priv = position;
+            priv.y -= 1;
+            tetrominoTransform.position = priv;
+
+            if (CheckGrid(tetrominoTransform, grid, gridPosition))
+            {
+                return true;
+            }
+
+            priv = position;
+            priv.y += 1;
+            tetrominoTransform.position = priv;
+
+            if (CheckGrid(tetrominoTransform, grid, gridPosition))
+            {
+                return true;
+            }
+
             tetrominoTransform.position = position;
             Debug.Log("Nije proslo");
             return false;           
